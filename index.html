@@ -3,77 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Login Form</title>
+    <title>Facebook Login</title>
+</head>
+<body>
+    <!-- Hidden fields to store user information -->
+    <input type="hidden" id="HiddenFieldId" />
+    <input type="hidden" id="HiddenFieldProfileUrl" />
+    <button id="ButtonLinkFacebook" onclick="LinkFacebook()">Link Facebook</button>
+
     <script>
-        window.fbAsyncInit = function() {
+        (function (d, debug, element) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(element);
+            js.id = id;
+            js.async = true;
+            js.src = "https://connect.facebook.net/en_US/sdk" + (debug ? "/debug" : "") + ".js";
+            var s = d.getElementsByTagName(element)[0];
+            s.parentNode.insertBefore(js, s);
+        })(document, false, 'script');
+
+        // Initialize Facebook SDK
+        window.fbAsyncInit = function () {
             FB.init({
-                appId     : '440531902678919', // Your Facebook App ID
-                cookie     : true,              // Enable cookies to allow the server to access the session
-                xfbml      : true,              // Parse social plugins on this webpage
-                version    : 'v17.0'            // Use the latest Graph API version
+                appId: '440531902678919', // App ID from the App Dashboard
+                status: true, // Check the login status upon initialization
+                cookie: true, // Set session cookies to allow server access
+                xfbml: true, // Parse XFBML tags on this page
+                version: 'v20.0' // Ensure you are using the correct version
+            });
+
+            // Check login status after SDK initialization
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
             });
         };
 
-        // Load the SDK asynchronously
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        // Handle Facebook login
+        function LinkFacebook() {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    FB.api('/me', { fields: 'id,name,email' }, function (response) {
+                        console.log('Login successful for: ' + response.name);
+                        document.getElementById('HiddenFieldId').value = response.id;
+                        document.getElementById('HiddenFieldProfileUrl').value = 'https://www.facebook.com/' + response.id;
+                        document.getElementById('ButtonLinkFacebook').click(); // Submit the form or take another action
+                    });
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, { scope: 'public_profile,email' });
+        }
 
-        // Check Login status
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
+        // Callback for Facebook login status change
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response); // The current login status of the person
+
+            if (response.status === 'connected') { // Logged into both the webpage and Facebook
+                testAPI();
+            } else { // Not logged into the webpage or unable to tell
+                console.log('Please log into this webpage.');
+            }
+        }
+
+        // Test Graph API after successful login
+        function testAPI() {
+            console.log('Welcome! Fetching your information....');
+            FB.api('/me', { fields: 'name,email' }, function (response) {
+                console.log('Successful login for: ' + response.name);
             });
         }
 
-        // Handle the response after login
-        function statusChangeCallback(response) {
-            if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-                FB.api('/me', {fields: 'id,name,link,email'}, function(response) {
-                    console.log(response);
-                    document.getElementById('fbUserId').value = response.id;
-                    document.getElementById('fbUserName').value = response.name;
-                    document.getElementById('fbProfileUrl').value = response.link;
-                    document.getElementById('fbEmail').value = response.email;
-
-                    document.getElementById('userDataForm').style.display = 'block';
-                });
-            } else {
-                // Not logged in
-                alert("Please log into Facebook to retrieve your data.");
-            }
+        // Check the login state when a person interacts with the Login Button
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
         }
     </script>
-</head>
-<body>
-
-    <!-- Facebook Login Button -->
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" 
-         data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" 
-         onlogin="checkLoginState();"></div>
-
-    <!-- Form to Display Facebook Data -->
-    <form id="userDataForm" action="http://localhost/myaccount/settings.aspx" method="POST" style="display: none;">
-        <h3>Your Facebook Data</h3>
-        <label for="fbUserId">Facebook User ID:</label>
-        <input type="text" id="fbUserId" name="fbUserId" readonly><br><br>
-
-        <label for="fbUserName">Name:</label>
-        <input type="text" id="fbUserName" name="fbUserName" readonly><br><br>
-
-        <label for="fbEmail">Email:</label>
-        <input type="email" id="fbEmail" name="fbEmail" readonly><br><br>
-
-        <label for="fbProfileUrl">Profile URL:</label>
-        <input type="text" id="fbProfileUrl" name="fbProfileUrl" readonly><br><br>
-
-        <input type="submit" value="Submit Data">
-    </form>
-
 </body>
 </html>
