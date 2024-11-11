@@ -17,87 +17,27 @@
     <title>Facebook Login</title>
 </head>
 <body>
-    <!-- Hidden fields to store user information -->
-    <input type="hidden" id="HiddenFieldId" />
-    <input type="hidden" id="HiddenFieldProfileUrl" />
-    <button id="ButtonLinkFacebook" onclick="LinkFacebook()">Link Facebook</button>
+  <a title="Share on Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.c-sharpcorner.com/article/entity-framework-3-with-net-mvc-model-first/Default.aspx" onclick="popupwindowAtCenter(this.href,'Share on LinkedIn',600,600);return false;" target="_blank" data-track="">
+                                                        <svg width="16" height="16" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_2915_80)">
+                                                                <path d="M1.08 0.0666656C0.786672 0.0666656 0.52 0.173338 0.32 0.373338C0.106672 0.586666 0 0.853322 0 1.13332C0 1.42665 0.12 1.69332 0.32 1.89332C0.52 2.09332 0.8 2.21332 1.06667 2.19999C1.06667 2.19999 1.08 2.19999 1.09334 2.19999C1.36002 2.19999 1.61334 2.09332 1.81334 1.89332C2.01334 1.69332 2.13334 1.42665 2.13334 1.13332C2.14667 0.853322 2.02667 0.58665 1.82667 0.38665C1.62667 0.173322 1.36 0.0666656 1.08 0.0666656ZM1.62667 1.70667C1.48 1.85334 1.28 1.94667 1.06667 1.93334C0.866672 1.93334 0.653344 1.85334 0.506672 1.70667C0.346672 1.55999 0.266672 1.34667 0.266672 1.13334C0.266672 0.920009 0.346672 0.720009 0.506672 0.560009C0.653344 0.413338 0.853344 0.333338 1.08 0.333338C1.28 0.333338 1.48 0.413338 1.62667 0.560009C1.78667 0.720009 1.86667 0.920009 1.86667 1.13334C1.86667 1.34667 1.78667 1.55999 1.62667 1.70667Z" fill="#B2BBD6"></path>
+                                                                <path d="M1.6 2.46666H0.520003C0.306675 2.46666 0.133331 2.63999 0.133331 2.86666V7.53333C0.133331 7.74666 0.320003 7.93333 0.533331 7.93333H1.6C1.81333 7.93333 2 7.74666 2 7.54666V2.86666C2 2.65332 1.81333 2.46666 1.6 2.46666ZM1.73333 7.54666C1.73333 7.61333 1.66666 7.66666 1.6 7.66666H0.533331C0.466659 7.66666 0.400003 7.59999 0.400003 7.53333V2.86666C0.400003 2.79999 0.453331 2.73333 0.520003 2.73333H1.6C1.66668 2.73333 1.73333 2.8 1.73333 2.86666V7.54666Z" fill="#B2BBD6"></path>
+                                                                <path d="M6.13334 2.33333H5.85334C5.33334 2.33333 4.84001 2.56 4.52001 2.92V2.73333C4.52001 2.6 4.38668 2.46666 4.25334 2.46666H2.92001C2.80001 2.46666 2.65334 2.57333 2.65334 2.71998V7.69331C2.65334 7.83998 2.80001 7.93331 2.92001 7.93331H4.38668C4.50668 7.93331 4.65335 7.83998 4.65335 7.69331V4.81331C4.65335 4.37331 4.97335 4.02664 5.38668 4.02664C5.60001 4.02664 5.80001 4.10664 5.94668 4.25331C6.08001 4.37331 6.13335 4.55998 6.13335 4.79998V7.66666C6.13335 7.79998 6.26668 7.93333 6.40002 7.93333H7.73335C7.86668 7.93333 8.00002 7.8 8.00002 7.66666V4.22666C8.00001 3.16 7.18668 2.33333 6.13334 2.33333ZM7.73334 7.65333L7.72001 7.66666H6.41334L6.40001 4.8C6.40001 4.48 6.32001 4.24 6.14668 4.06667C5.94668 3.86667 5.68001 3.76 5.40001 3.76C4.84001 3.77333 4.40001 4.22667 4.40001 4.81333V7.66666H2.93334V2.73333H4.25334L4.26666 2.74666V3.58666L4.62666 3.22666L4.63999 3.21333C4.90666 2.84 5.37332 2.6 5.86666 2.6H6.14666C7.03999 2.6 7.73334 3.32 7.73334 4.22667V7.65333Z" fill="#B2BBD6"></path>
+                                                            </g><defs><clipPath id="clip0_2915_80"><rect width="16" height="16" fill="white"></rect></clipPath>
+                                                            </defs></svg>
+
+                                                    </a>
 
     <script>
-        (function (d, debug, element) {
-            var js, id = 'facebook-jssdk';
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(element);
-            js.id = id;
-            js.async = true;
-            js.src = "https://connect.facebook.net/en_US/sdk" + (debug ? "/debug" : "") + ".js";
-            var s = d.getElementsByTagName(element)[0];
-            s.parentNode.insertBefore(js, s);
-        })(document, false, 'script');
-
-        // Initialize Facebook SDK
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '440531902678919', // App ID from the App Dashboard
-                status: true, // Check the login status upon initialization
-                cookie: true, // Set session cookies to allow server access
-                xfbml: true, // Parse XFBML tags on this page
-                version: 'v20.0' // Ensure you are using the correct version
-            });
-
-            // Check login status after SDK initialization
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        };
-
-        // Handle Facebook login
-        function LinkFacebook() {
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    var accessToken = response.authResponse.accessToken;
-                    console.log('Access Token: ' + accessToken); // Print Access Token
-
-                    FB.api('/me', { fields: 'id,name,email' }, function (response) {
-                        console.log('Login successful for: ' + response.name);
-                        var profileUrl = 'https://www.facebook.com/' + response.id;
-                        console.log('Profile URL: ' + profileUrl); // Print Profile URL
-                        
-                        document.getElementById('HiddenFieldId').value = response.id;
-                        document.getElementById('HiddenFieldProfileUrl').value = profileUrl;
-                        document.getElementById('ButtonLinkFacebook').click(); // Submit the form or take another action
-                    });
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                }
-            }, { scope: 'public_profile,email' });
-        }
-
-        // Callback for Facebook login status change
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response); // The current login status of the person
-
-            if (response.status === 'connected') { // Logged into both the webpage and Facebook
-                testAPI();
-            } else { // Not logged into the webpage or unable to tell
-                console.log('Please log into this webpage.');
-            }
-        }
-
-        // Test Graph API after successful login
-        function testAPI() {
-            console.log('Welcome! Fetching your information....');
-            FB.api('/me', { fields: 'name,email' }, function (response) {
-                console.log('Successful login for: ' + response.name);
-            });
-        }
-
-        // Check the login state when a person interacts with the Login Button
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
+      function popupwindowAtCenter(e, t, o, a) {
+    console.log(e);
+    console.log(t);
+    console.log(o);
+    console.log(a);
+    var n = screen.width / 2 - o / 2,
+        i = screen.height / 2 - a / 2;
+    return window.open(e, t, "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width=" + o + ", height=" + a + ", top=" + i + ", left=" + n);
+}
     </script>
 </body>
 </html>
