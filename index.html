@@ -54,6 +54,8 @@
         .video-loader-box {
             text-align: center;
             margin-top: 20px;
+            position: relative;
+            z-index: 0;
         }
     </style>
 </head>
@@ -66,15 +68,31 @@
     autocomplete="off" 
 />
 
-
+<div class="videoHeader">
+    <div class="heading">Filter</div>
+    <div id="ctl00_MainContent_videoFilters" class="video-filter">
+        <span>
+            <input 
+                name="ctl00$MainContent$txtFiltereSearchBox" 
+                type="text" 
+                id="txtFiltereSearchBox" 
+                class="input-control" 
+                placeholder="Search By Author" 
+                autocomplete="off" 
+            />
+        </span>
+    </div>
+</div>
 
 </body>
 <script>
 document.getElementById('searchTextBox').addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Prevent any default behavior
+        e.stopPropagation(); // Stop event from bubbling up
         alert("Hello");
     }
 });
 </script>
+
 </html>
