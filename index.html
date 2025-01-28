@@ -83,12 +83,19 @@
 </div>
 
 </body>
-      <script>
+<script>
 document.getElementById('searchTextBox').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Prevent any default behavior
-      alert("Hello");
+        alert("Hello");
     }
 });
-    </script>
+
+document.getElementById('searchTextBox').addEventListener('input', function (e) {
+    if (e.inputType === 'insertText' && e.data === '\n') {
+        e.preventDefault(); // Prevent any default behavior
+        alert("Hello");
+    }
+});
+</script>
 </html>
