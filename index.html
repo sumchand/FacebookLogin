@@ -23,12 +23,12 @@
 
     
     <script>
-     document.getElementById('searchTextBox').addEventListener('keydown', function (e) {
+document.getElementById('searchTextBox').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
-        alert("Hello Search")
+        e.preventDefault(); // Prevent any default behavior
+        SearchContent(e);
     }
 });
-}
     </script>
 </body>
 </html>
