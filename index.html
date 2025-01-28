@@ -57,6 +57,9 @@
             position: relative;
             z-index: 0;
         }
+          #BtnSearch {
+            display: none; /* Button will not be visible */
+        }
     </style>
 </head>
 <body>
@@ -67,7 +70,7 @@
     placeholder="Search" 
     autocomplete="off" 
 />
-     <input 
+   <input 
             type="submit" 
             name="ctl00$ContentMain$BtnSearch" 
             onclick="return Search();" 
