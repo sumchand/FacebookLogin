@@ -58,94 +58,30 @@
     </style>
 </head>
 <body>
-    <input 
-        type="text" 
-        id="searchTextBox" 
-        class="input-global-search" 
-        placeholder="Search" 
-        autocomplete="off" 
-    />
+  <input 
+    type="text" 
+    id="searchTextBox" 
+    class="input-global-search" 
+    placeholder="Search" 
+    autocomplete="off" 
+/>
 
-    <div class="videoHeader">
-        <div class="recent-videos full-container">
-            <div id="ctl00_MainContent_VideoHeader" class="video-title-search">
-                "Reactjs" VIDEOS
-            </div>
-        </div>
-
-        <div class="heading">Filter</div>
-        
-        <div id="ctl00_MainContent_videoFilters" class="video-filter">
-            <span class="customDropDown">
-                <select 
-                    name="ctl00$MainContent$ddlVideosCategories" 
-                    id="ddlVideosCategories" 
-                    class="CommonTextBoxStyle scrollbar"
-                >
-                    <option selected value="">Select Category</option>
-                    <option value="dotnet">.NET</option>
-                    <option value="dotnetcore">.NET Core</option>
-                    <option value="active-directory">Active Directory</option>
-                    <option value="ado-dot-net">ADO.NET</option>
-                    <option value="agile-development">Agile Development</option>
-                    <option value="ajax">AJAX</option>
-                    <!-- Add other options here as needed -->
-                </select>
-            </span>
-
-            <span class="customDropDown">
-                <select 
-                    name="ctl00$MainContent$ddlComplexity" 
-                    id="ddlComplexity" 
-                    class="CommonTextBoxStyle"
-                >
-                    <option selected value="all">Level</option>
-                    <option value="0">Beginner</option>
-                    <option value="1">Intermediate</option>
-                    <option value="2">Advanced</option>
-                </select>
-            </span>
-
-            <span>
-                <input 
-                    name="ctl00$MainContent$txtFiltereSearchBox" 
-                    type="text" 
-                    id="txtFiltereSearchBox" 
-                    class="input-control" 
-                    placeholder="Search By Author" 
-                    autocomplete="off"
-                />
-            </span>
-        </div>
+<div class="videoHeader">
+    <div class="heading">Filter</div>
+    <div id="ctl00_MainContent_videoFilters" class="video-filter">
+        <span>
+            <input 
+                name="ctl00$MainContent$txtFiltereSearchBox" 
+                type="text" 
+                id="txtFiltereSearchBox" 
+                class="input-control" 
+                placeholder="Search By Author" 
+                autocomplete="off" 
+            />
+        </span>
     </div>
+</div>
 
-    <div class="video-loader-box">
-        <div id="filter-loader" style="display: none;">
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 100 100" 
-                preserveAspectRatio="xMidYMid" 
-                width="30" 
-                height="30"
-            >
-                <g>
-                    <g transform="rotate(0 50 50)">
-                        <rect fill="#bcdbfe" height="12" width="6" ry="6" rx="3" y="24" x="47">
-                            <animate 
-                                repeatCount="indefinite" 
-                                begin="-0.9166666666666666s" 
-                                dur="1s" 
-                                keyTimes="0;1" 
-                                values="1;0" 
-                                attributeName="opacity"
-                            ></animate>
-                        </rect>
-                    </g>
-                    <!-- Add other rotating bars as needed -->
-                </g>
-            </svg>
-        </div>
-    </div>
 </body>
       <script>
 document.getElementById('searchTextBox').addEventListener('keydown', function (e) {
