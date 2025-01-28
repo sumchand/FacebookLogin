@@ -84,15 +84,8 @@
 
 </body>
 <script>
-document.getElementById('searchTextBox').addEventListener('keydown', function (e) {
+document.getElementById('searchTextBox').addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent any default behavior
-        alert("Hello");
-    }
-});
-
-document.getElementById('searchTextBox').addEventListener('input', function (e) {
-    if (e.inputType === 'insertText' && e.data === '\n') {
         e.preventDefault(); // Prevent any default behavior
         alert("Hello");
     }
